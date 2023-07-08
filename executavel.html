@@ -1,3 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chatbot de Adassa Jeanneffer</title>
+</head>
+<body>
+
+<script>
+  
+let simOuNao;
+
+function continuarOuFechar(){
+
+simOuNao = prompt('Deseja fazer uma nova consulta (s/n)?');
+
+if( simOuNao == 's'){
+
+sentença = prompt ('escreva uma sentença');
+atribuiOpção();
+
+}else if(simOuNao == 'n'){
+
+alert('Fique à vontade para conhecer um pouco mais sobre mim. Até mais!');
+
+window.open('https://www.linkedin.com/in/adassa-jeanneffer/','_self');
+
+
+}else{
+
+alert('Insira um valor válido.');
+continuarOuFechar();
+}
+
+}
+
 let sentença = prompt ('escreva uma sentença');
 
 let opção;
@@ -7,37 +42,117 @@ function atribuiOpção(){
 opção = prompt ('escolha entre: 1.  Reverter a ordem das palavras nas frases, mantendo a ordem das palavras / 2.  Remover todos os caracteres duplicados da sentença / 3.  Encontar a substring palindroma mais longa na sentença / 4.  Coloque em maiúscula a primeira letra de cada frase da sentença / 5. Verificar se a palavra é um anagrama de um palíndromo');
 
 
-
-
 if (opção == 1) {
-  function reverseWords(input) {
-  const words = input.split(' ');
-  const reversed = words.reverse();
-  return reversed.join(' ');
+  function palavrasReversas(input) {
+  const palavras = input.split(' ');
+  const invertida = palavras.reverse();
+  return invertida.join(' ');
 }
 
-alert(reverseWords(sentença));
+alert(palavrasReversas(sentença));
+continuarOuFechar();
 
 } else if (opção == 2) {
-  alert('dois');
+//remove caracteres duplicados de uma sentença
+function removerDuplicadas(input) {
+  const caracteresUnicos = [];
+  const caracteres = input.split('');
+  for (let char of caracteres) {
+    if (!caracteresUnicos.includes(char)) {
+       caracteresUnicos.push(char);
+    }
+  }
+  return caracteresUnicos.join('');
+}
+  alert(removerDuplicadas(sentença));
+  continuarOuFechar();
+
 } else if (opção == 3) {
-  alert('três');
+
+//retorna o palíndromo mais longo da sentença
+function substringPalindromaMaisLonga(input) {
+  let maisLongo = '';
+  for (let i = 0; i < input.length; i++) {
+    for (let j = i + 1; j <= input.length; j++) {
+      const substring = input.slice(i, j);
+      if (ePalindromo(substring) && substring.length > maisLongo.length) {
+        maisLongo = substring;
+      }
+    }
+  }
+  return maisLongo;
+}
+
+function ePalindromo(str) {
+  const invertida = str.split('').reverse().join('');
+  return str === invertida;
+}
+  alert(substringPalindromaMaisLonga(sentença));
+  continuarOuFechar();
+
 } else if (opção == 4) {
-  alert('quatro');
+
+//Coloca em maiúscula a primeira letra de cada frase da sentença
+function capitalizarSentencas(input) {
+  const sentenca = input.split(/([.!?]+)/);
+
+  for (let i = 0; i < sentenca.length; i += 2) {
+    const sentence = sentenca[i].trim();
+    if (sentence.length > 0) {
+      const primeiroCaractere = sentence.charAt(0).toUpperCase();
+      const rest = sentence.slice(1);
+      sentenca[i] = primeiroCaractere + rest;
+    }
+  }
+
+  return sentenca.map((sentence, index) => {
+    if (index % 2 === 0) {
+      return sentence;
+    } else {
+      return sentence.trim() + ' ';
+    }
+  }).join('');
+}
+
+
+alert(capitalizarSentencas(sentença));
+continuarOuFechar();
 } else if (opção == 5) {
-  alert('cinco');
+
+//Verificar se a palavra é um anagrama de um palíndromo
+function eAnagramaDePalindromo(input) {
+  const contaCaractere = {};
+  for (let char of input) {
+    if (contaCaractere[char]) {
+      contaCaractere[char]++;
+    } else {
+      contaCaractere[char] = 1;
+    }
+  }
+  let contImpar = 0;
+  for (let count of Object.values(contaCaractere)) {
+    if (count % 2 !== 0) {
+      contImpar++;
+    }
+  }
+  return contImpar <= 1;
+}
+
+  alert(eAnagramaDePalindromo(sentença));
+  continuarOuFechar();
+
 } else {
-  alert('Nenhuma opção válida selecionada.');
+  alert('Insira o valor de uma opção válida.');
 atribuiOpção();
 
 }
 }
 
 
-
-
-
-
-
-
 atribuiOpção();
+
+
+</script>
+
+</body>
+</html>
