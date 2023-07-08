@@ -1,1 +1,43 @@
+let sentença = prompt ('escreva uma sentença');
 
+let opção;
+
+function atribuiOpção(){
+
+opção = prompt ('escolha entre: 1.  Reverter a ordem das palavras nas frases, mantendo a ordem das palavras / 2.  Remover todos os caracteres duplicados da sentença / 3.  Encontar a substring palindroma mais longa na sentença / 4.  Coloque em maiúscula a primeira letra de cada frase da sentença / 5. Verificar se a palavra é um anagrama de um palíndromo');
+
+
+
+
+if (opção == 1) {
+  function reverseWords(input) {
+  const words = input.split(' ');
+  const reversed = words.reverse();
+  return reversed.join(' ');
+}
+
+alert(reverseWords(sentença));
+
+} else if (opção == 2) {
+  alert('dois');
+} else if (opção == 3) {
+  alert('três');
+} else if (opção == 4) {
+  alert('quatro');
+} else if (opção == 5) {
+  alert('cinco');
+} else {
+  alert('Nenhuma opção válida selecionada.');
+atribuiOpção();
+
+}
+}
+
+
+
+
+
+
+
+
+atribuiOpção();
