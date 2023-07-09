@@ -1,0 +1,92 @@
+
+//reverte a ordem das palavras de uma frase
+function palavrasReversas(input) {
+  const palavras = input.split(' ');
+  const invertida = palavras.reverse();
+  return invertida.join(' ');
+}
+
+
+
+//remove caracteres duplicados de uma sentença
+function removerDuplicadas(input) {
+  const caracteresUnicos = [];
+  const caracteres = input.split('');
+  for (let char of caracteres) {
+    if (!caracteresUnicos.includes(char)) {
+       caracteresUnicos.push(char);
+    }
+  }
+  return caracteresUnicos.join('');
+}
+
+//retorna o palíndromo mais longo da sentença
+function substringPalindromaMaisLonga(input) {
+  let maisLongo = '';
+  for (let i = 0; i < input.length; i++) {
+    for (let j = i + 1; j <= input.length; j++) {
+      const substring = input.slice(i, j);
+      if (ePalindromo(substring) && substring.length > maisLongo.length) {
+        maisLongo = substring;
+      }
+    }
+  }
+  return maisLongo;
+}
+
+
+function ePalindromo(str) {
+  const invertida = str.split('').reverse().join('');
+  return str === invertida;
+}
+
+
+//Coloca em maiúscula a primeira letra de cada frase da sentença
+function capitalizarSentencas(input) {
+  const sentenca = input.split(/([.!?]+)/);
+
+  for (let i = 0; i < sentenca.length; i += 2) {
+    const sentence = sentenca[i].trim();
+    if (sentence.length > 0) {
+      const primeiroCaractere = sentence.charAt(0).toUpperCase();
+      const rest = sentence.slice(1);
+      sentenca[i] = primeiroCaractere + rest;
+    }
+  }
+
+  return sentenca.map((sentence, index) => {
+    if (index % 2 === 0) {
+      return sentence;
+    } else {
+      return sentence.trim() + ' ';
+    }
+  }).join('');
+}
+
+
+//Verificar se a palavra é um anagrama de um palíndromo
+function eAnagramaDePalindromo(input) {
+  const contaCaractere = {};
+  for (let char of input) {
+    if (contaCaractere[char]) {
+      contaCaractere[char]++;
+    } else {
+      contaCaractere[char] = 1;
+    }
+  }
+  let contImpar = 0;
+  for (let count of Object.values(contaCaractere)) {
+    if (count % 2 !== 0) {
+      contImpar++;
+    }
+  }
+  return contImpar <= 1;
+}
+
+
+// Casos de teste
+console.log(palavrasReversas("Hello, world! OpenAI is amazing."));
+console.log(removerDuplicadas("Hello, World!"));
+console.log(substringPalindromaMaisLonga("babad"));
+console.log(capitalizarSentencas("hello. how are you? i'm fine, thank you."));
+console.log(eAnagramaDePalindromo("racecar"));
